@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Paneli</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .msg { border: 1px solid #555; padding: 10px; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+<h2>Gelen Mesajlar</h2>
+<div id="list"></div>
+
+<script>
+fetch("/admin")
+    .then(r => r.json())
+    .then(data => {
+        let html = "";
+        data.forEach(m => {
+            html += `<div class='msg'><b>${m.date}</b><br>${m.text}</div>`;
+        });
+        document.getElementById("list").innerHTML = html;
+    });
+</script>
+
+</body>
+</html>
