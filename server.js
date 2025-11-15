@@ -34,3 +34,21 @@ app.get("/admin", (req, res) => {
 });
 
 app.listen(PORT, () => console.log("Server running on " + PORT));
+const express = require('express');
+const path = require('path');
+const app = express();
+
+const PORT = process.env.PORT || 10000;
+
+// HTML/CSS/JS dosyalarının olduğu klasörü sun
+app.use(express.static(path.join(__dirname, 'public'))); // 'public' klasörünü dosyalarınla değiştir
+
+// Ana route
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html')); // index.html dosyanın yolu
+});
+
+// Server başlat
+app.listen(PORT, () => {
+    console.log(`Server running on ${PORT}`);
+});
